@@ -51,3 +51,39 @@ Cypress.Commands.add('token', (email, senha) => {
           failOnStatusCode: false
     })
  })
+
+ Cypress.Commands.add("cadastrarUsuario",(nome,email,password,administrador)=>{
+    cy.request({
+        method:"POST",
+        url:"usuarios",
+        body:{
+             "nome":nome,
+             "email": email,
+             "password": password,
+             "administrador": administrador
+        },
+        failOnStatusCode: false
+    })
+ })
+
+ Cypress.Commands.add("editarUsuarioCadastrado",(id,newNome,newEmail,newPassword,newAdmin)=>{
+    cy.request({
+        method:"PUT",
+        url:`usuarios/${id}`,
+        body:{
+            "nome":newNome,
+            "email": newEmail,
+            "password": newPassword,
+            "administrador":newAdmin
+        },
+        failOnStatusCode: false
+    })
+ })
+
+ Cypress.Commands.add("deletarUsuario",(id)=>{
+    cy.request({
+        method:"DELETE",
+        url:`usuarios/${id}`,
+        failOnStatusCode: false
+    })
+ })
